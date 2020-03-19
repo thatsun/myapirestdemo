@@ -15,7 +15,7 @@ exports.orders_get_all= (req,res,next)=>{
                     _id: doc._id,
                     product: doc.product,
                     quantity: doc.quantity,
-                    request: {
+                    typerequest: {
                         type: 'GET',
                         url: 'https://myapirestdemo.herokuapp.com/orders/'+doc._id
                     }
@@ -58,7 +58,7 @@ exports.orders_create_order=(req,res,next)=>{
                 product: result.product,
                 quantity: result.quantity
             },
-            request: {
+            typerequest: {
                 type: 'GET',
                 url: 'https://myapirestdemo.herokuapp.com//orders/'+ result._id
             }
@@ -88,7 +88,7 @@ exports.orders_get_order=(req,res,next)=>{
         }
         res.status(200).json({
             order: order,
-            request:{
+            typerequest:{
                 type: 'GET',
                 url: 'https://myapirestdemo.herokuapp.com//orders'
 
@@ -110,7 +110,7 @@ exports.orders_delete_order=(req,res,next)=>{
     .then(result =>{
         res.status(200).json({
             message: 'Order deleted',
-            request:{
+            typerequest:{
                 type: 'POST',
                 url: 'https://myapirestdemo.herokuapp.com/orders',
                 body:{ productId: 'ID', quantity:'Number'}

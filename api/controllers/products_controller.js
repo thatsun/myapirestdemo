@@ -16,7 +16,7 @@ exports.products_get_all=(req,res,next) =>{
                     price: doc.price,
                     _id: doc._id,
                     request: {
-                        type: 'GET',
+                        typerequest: 'GET',
                         url: 'https://myapirestdemo.herokuapp.com/products/'+doc._id
                     }
 
@@ -55,7 +55,7 @@ exports.products_crate_product=(req,res,next) =>{
                     _id: result._id,
                     productImage: result.productImage,
                     request: {
-                        type: 'GET',
+                        typerequest: 'GET',
                         url: 'https://myapirestdemo.herokuapp.com/products/'+result._id
                     } 
                 }
@@ -87,7 +87,7 @@ exports.products_get_product=(req,res,next) =>{
                     _id: doc._id,
                     productImage: doc.productImage,
                     request: {
-                        type: 'GET',
+                        typerequest: 'GET',
                         description: 'Get all products',
                         url: 'https://myapirestdemo.herokuapp.com/products'
                     } 
@@ -122,7 +122,7 @@ exports.products_edit_product=(req,res,next) =>{
         UpdatedProduct: {
            
             request: {
-                type: 'GET',
+                typerequest: 'GET',
                 url: 'https://myapirestdemo.herokuapp.com/products/'+id
             } 
         }
