@@ -6,7 +6,7 @@ exports.products_get_all=(req,res,next) =>{
 
     
     Product.find()
-    .select('name price _id productImage')
+    .select('name price Id productImage')
     .exec()
     .then(docs=> {
         const response={            
@@ -74,7 +74,7 @@ exports.products_crate_product=(req,res,next) =>{
 exports.products_get_product=(req,res,next) =>{
     const Id= req.params.productId;
     Product.findById(Id)
-        .select('name price _id productImage')
+        .select('name price Id productImage')
         .exec()
         .then(doc =>{
             console.log("From database",doc);
