@@ -26,7 +26,7 @@ exports.user_singup=(req,res,next)=>{
                 }   
                 else{
                     const user= new User({
-                        _id: new mongoose.Types.ObjectId(),
+                        Id: new mongoose.Types.ObjectId(),
                         email: req.body.email,
                         password: hash
                 
@@ -73,7 +73,7 @@ exports.user_login=(req,res,next)=>{
 
                 const token = jwt.sign({
                     email : users[0].email,
-                    userId: users[0].id
+                    userId: users[0].Id
                 },process.env.JWT_KEY,
                 {
                     expiresIn: "1h",
@@ -102,7 +102,7 @@ exports.user_login=(req,res,next)=>{
 }
 
 exports.user_delete=(req,res,next)=>{
-    User.deleteOne({ _id: req.params.orderId})
+    User.deleteOne({ Id: req.params.userId})
     .exec()
     .then(result =>{
         res.status(200).json({

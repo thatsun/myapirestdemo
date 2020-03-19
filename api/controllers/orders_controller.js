@@ -4,7 +4,7 @@ const Product = require('../models/product');
 
 exports.orders_get_all= (req,res,next)=>{
     Order.find()
-    .select('product quantity _id')
+    .select('product quantity Id')
     .populate('product','name')
     .exec()
     .then( docs =>{
@@ -12,12 +12,12 @@ exports.orders_get_all= (req,res,next)=>{
             coont: docs.length,
             orders: docs.map(doc =>{
                 return{
-                    _id: doc._id,
+                    Id: doc.Id,
                     product: doc.product,
                     quantity: doc.quantity,
                     typerequest: {
                         type: 'GET',
-                        url: 'https://myapirestdemo.herokuapp.com/orders/'+doc._id
+                        url: 'https://myapirestdemo.herokuapp.com/orders/'+doc.Id
                     }
                 }
             })
@@ -43,7 +43,7 @@ exports.orders_create_order=(req,res,next)=>{
 
         }
         const order= new Order({
-            _id: mongoose.Types.ObjectId(),
+            Id: mongoose.Types.ObjectId(),
             quantity: req.body.quantity,
             product: req.body.productId
     
@@ -54,13 +54,13 @@ exports.orders_create_order=(req,res,next)=>{
         res.status(201).json({
             message: 'order stored',
             createdOrder:{
-                _id: result._id,
+                Id: result.Id,
                 product: result.product,
                 quantity: result.quantity
             },
             typerequest: {
                 type: 'GET',
-                url: 'https://myapirestdemo.herokuapp.com//orders/'+ result._id
+                url: 'https://myapirestdemo.herokuapp.com//orders/'+ result.Id
             }
         });
     })
@@ -76,7 +76,7 @@ exports.orders_create_order=(req,res,next)=>{
 
 exports.orders_get_order=(req,res,next)=>{
     Order.findById(req.params.orderId)
-    .select('product quantity _id')
+    .select('product quantity Id')
     .populate('product','name')
     .exec()
     .then(order =>{
@@ -105,7 +105,7 @@ exports.orders_get_order=(req,res,next)=>{
 }
 
 exports.orders_delete_order=(req,res,next)=>{
-    Order.deleteOne({ _id: req.params.orderId})
+    Order.deleteOne({ Id: req.params.orderId})
     .exec()
     .then(result =>{
         res.status(200).json({
