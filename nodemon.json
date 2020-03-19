@@ -1,0 +1,6 @@
+{
+    "env":{
+        "MONGO_ATLAS_PW": "myapirestdemo_client",
+        "JWT_KEY":"secret"
+    }
+}
