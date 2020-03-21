@@ -14,10 +14,10 @@ exports.products_get_all=(req,res,next) =>{
                 return{
                     name: doc.name,
                     price: doc.price,
-                    Id: doc.Id,
+                    Id: doc._id,
                     request: {
                         typerequest: 'GET',
-                        url: 'https://myapirestdemo.herokuapp.com/products/'+doc.Id
+                        url: 'https://myapirestdemo.herokuapp.com/products/'+doc._id
                     }
 
                 }
