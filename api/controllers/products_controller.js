@@ -38,7 +38,7 @@ exports.products_get_all=(req,res,next) =>{
 exports.products_crate_product=(req,res,next) =>{   
     console.log(req.file);
     const product=new Product({
-        Id: new mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         price: req.body.price,
         productImage: req.file.path
@@ -52,11 +52,11 @@ exports.products_crate_product=(req,res,next) =>{
                 createdProduct: {
                     name: result.name,
                     price: result.price,
-                    Id: result.Id,
+                    Id: result._id,
                     productImage: result.productImage,
                     request: {
                         typerequest: 'GET',
-                        url: 'https://myapirestdemo.herokuapp.com/products/'+result.Id
+                        url: 'https://myapirestdemo.herokuapp.com/products/'+result._id
                     } 
                 }
             });
@@ -84,7 +84,7 @@ exports.products_get_product=(req,res,next) =>{
                 ProductFound: {
                     name: doc.name,
                     price: doc.price,
-                    Id: doc.Id,
+                    Id: doc._id,
                     productImage: doc.productImage,
                     request: {
                         typerequest: 'GET',
@@ -114,7 +114,7 @@ exports.products_edit_product=(req,res,next) =>{
 
     }
 
-    Product.updateOne({ Id: Id }, updateOps)
+    Product.updateOne({ _id: Id }, updateOps)
     .exec()
     .then(result => {
         console.log(result);
@@ -140,7 +140,7 @@ exports.products_edit_product=(req,res,next) =>{
 exports.products_delete_product=(req,res,next) =>{
     const Id=req.params.productId;
 
-    Product.deleteOne({Id: Id})
+    Product.deleteOne({_id: Id})
     .exec()
     .then(result => {
         res.status(200).json({

@@ -12,12 +12,12 @@ exports.orders_get_all= (req,res,next)=>{
             coont: docs.length,
             orders: docs.map(doc =>{
                 return{
-                    Id: doc.Id,
+                    Id: doc._id,
                     product: doc.product,
                     quantity: doc.quantity,
                     typerequest: {
                         type: 'GET',
-                        url: 'https://myapirestdemo.herokuapp.com/orders/'+doc.Id
+                        url: 'https://myapirestdemo.herokuapp.com/orders/'+doc._id
                     }
                 }
             })
@@ -54,13 +54,13 @@ exports.orders_create_order=(req,res,next)=>{
         res.status(201).json({
             message: 'order stored',
             createdOrder:{
-                Id: result.Id,
+                Id: result._id,
                 product: result.product,
                 quantity: result.quantity
             },
             typerequest: {
                 type: 'GET',
-                url: 'https://myapirestdemo.herokuapp.com//orders/'+ result.Id
+                url: 'https://myapirestdemo.herokuapp.com//orders/'+ result._id
             }
         });
     })
@@ -105,7 +105,7 @@ exports.orders_get_order=(req,res,next)=>{
 }
 
 exports.orders_delete_order=(req,res,next)=>{
-    Order.deleteOne({ Id: req.params.orderId})
+    Order.deleteOne({ _id: req.params.orderId})
     .exec()
     .then(result =>{
         res.status(200).json({
