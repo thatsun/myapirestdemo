@@ -26,11 +26,12 @@ app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-
+app.use(cors());
 
 app.use((req,res,next)=>{
     res.header("Acces-Control-Allow-Origin","*");
     res.header("Acces-Control-Allow-Headres","Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.Header('Access-Control-Allow-Credentials', true);
     if(req.method === 'OPTIONS'){
         res.header('Acces-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET');
         return res.status(200).json({});
