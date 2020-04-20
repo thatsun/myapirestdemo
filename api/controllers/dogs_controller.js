@@ -40,7 +40,7 @@ exports.dogs_add_dog=(req,res,next) =>{
     console.log(req.file);  
 
     console.log(req.file);
-    const Dog=new Dog({
+    const dog=new Dog({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         user: req.body.user,
@@ -48,7 +48,7 @@ exports.dogs_add_dog=(req,res,next) =>{
         status:'normal',
         platenumber:''
     });
-    Dog
+    dog
         .save()
         .then(result=>{
             console.log(result);
