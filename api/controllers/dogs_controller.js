@@ -39,113 +39,40 @@ exports.dogs_get_all=(req,res,next) =>{
 exports.dogs_add_dog=(req,res,next) =>{   
     console.log(req.file);  
 
-    Plate.findById('5e9d31311c9d440000298b1a')
-        .select('platecounter platecounter_char1 platecounter_char2')
-        .exec()
-        .then(doc =>{
-            
-            
-            
-            if(doc){
-                console.log("Previous",doc.platecounter , doc.platecounter_char1,platecounter_char2);
-                
-
-                var newplate=doc.platecounter1;
-                var charnumber1= doc.platecounter_char1;
-                var charnumber2= doc.platecounter_char2;      
-                resolve(newplate,charnumber1,charnumber2);
-            }
-            else{
-                res.status(404).json({ message: 'Error al crear la placa nueva'});
-            }
-                  
-        }).then( (newplate , charnumber1, charnumber2) =>{
-            newplate=newplate+1;
-            if(newplate==10){
-                if(charnumber1==4 & charnumber2==4){
-                    charnumber1=0;
-                    charnumber2=0;
-                    newplate=1;
-
+    console.log(req.file);
+    const Dog=new Dog({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        user: req.body.user,
+        dogImage: req.file.path,
+        status:'normal',
+        platenumber:''
+    });
+    Dog
+        .save()
+        .then(result=>{
+            console.log(result);
+            res.status(201).json({
+                message: 'Dog Added succesfully',
+                createdDog: {
+                    name: result.name,
+                    user: result.user,
+                    Id: result._id,
+                    dogImage: result.dogImage,
+                    status:result.status,
+                    platenumber:result.platenumber,
+                    request: {
+                        typerequest: 'GET',
+                        url: 'https://myapirestdemo.herokuapp.com/products/'+result._id
+                    } 
                 }
-                else{
-                    if(charnumber2==4){
-                        charnumber1=charnumber1+1;
-                        charnumber2=0;
-                        newplate=1;
-
-                    }
-                    else{
-                        charnumber2=charnumber2+1;
-                        newplate=1;
-
-                    }
-
-                }
-
-            }
-            const chars=['a','b','c','d','e'];
-            var _newplate=chars[charnumber1]+chars[charnumber2]+'-'+newplate.toString(); 
-            var plateupdateOps=[
-                { "propName": "platecounter" , "value": newplate.toString()},
-                { "propName": "platecounter_char1" , "value": charnumber1.toString()},
-                { "propName": "platecounter_char2" , "value": charnumber2.toString()}
-        
-            ];
-            resolve(_newplate,plateupdateOps);
-
-        }).then( (_newplate,plateupdateOps)=>{
-            Plate.updateOne({ _id: '5e9d31311c9d440000298b1a' }, plateupdateOps)
-                .exec()
-                .then(result => {
-                    console.log(result);
-                    resolve(_newplate);
-                })
-                .then( _newplate =>{
-                    const Dog=new Dog({
-                        _id: new mongoose.Types.ObjectId(),
-                        name: req.body.name,
-                        user: req.body.userId,
-                        platenumber:_newplate,
-                        dogImage: req.file.path
-                    });
-                    Dog.save()
-                        .then(result=>{
-                        console.log(result);
-                        res.status(201).json({
-                            message: 'Dog added succesfully',
-                            createdDog: {
-                            name: result.name,
-                            user: result.user,
-                            Id: result._id,
-                            dogImage: result.dogImage,
-                            request: {
-                                typerequest: 'GET',
-                                url: 'https://myapirestdemo.herokuapp.com/dogs/'+result._id
-                                } 
-                            }
-                            });
-                        })
-                        .catch(err=> {
-                            console.log(err);
-                            res.status(500).json({
-                            message: err
-                        });
-                    });
-
-                })
-                .catch(err=>{
-                console.log(err);
-                    res.status(500).json({
-                    error: err
-                });
             });
-
-
         })
-        .catch(err => {
+        .catch(err=> {
             console.log(err);
-            res.status(500).json({ error: err});
+            res.status(500).json({
+                message: err
+            });
         });
 }
 
