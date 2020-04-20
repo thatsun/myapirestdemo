@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Dog= require('../models/dog');
-const Plate= require('../models/dogcounter');
+const Plate= require('../models/plates');
 
 exports.dogs_get_all=(req,res,next) =>{
-    const userId= req.body.userId;
+    const userId= req.params.userId;
     Dog.find({user:userId})
     .select('name _id dogImage platenumber status')
     .exec()
@@ -37,9 +37,7 @@ exports.dogs_get_all=(req,res,next) =>{
 }
 
 exports.dogs_add_dog=(req,res,next) =>{   
-    console.log(req.file);
-
-    
+    console.log(req.file);  
 
     Plate.findById('5e9d31311c9d440000298b1a')
         .select('platecounter platecounter_char1 platecounter_char2')
@@ -104,7 +102,7 @@ exports.dogs_add_dog=(req,res,next) =>{
                     resolve(_newplate);
                 })
                 .then( _newplate =>{
-                    const Dog=new dogcounter({
+                    const Dog=new Dog({
                         _id: new mongoose.Types.ObjectId(),
                         name: req.body.name,
                         user: req.body.userId,
