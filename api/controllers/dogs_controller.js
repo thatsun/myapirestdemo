@@ -104,7 +104,7 @@ exports.dogs_add_dog=(req,res,next) =>{
                     resolve(_newplate);
                 })
                 .then( _newplate =>{
-                    const Dog=new Dog({
+                    const Dog=new dogcounter({
                         _id: new mongoose.Types.ObjectId(),
                         name: req.body.name,
                         user: req.body.userId,
