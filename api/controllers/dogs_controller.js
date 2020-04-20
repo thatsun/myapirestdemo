@@ -176,7 +176,7 @@ exports.dogs_get_dog=(req,res,next) =>{
                     user: doc.user,
                     Id: doc._id,
                     dogImage: doc.dogImage,
-                    platenumber=doc.platenumber,
+                    platenumber:doc.platenumber,
                     request: {
                         typerequest: 'GET',
                         description: 'Get all dogs',
