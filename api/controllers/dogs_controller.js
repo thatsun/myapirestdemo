@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Dog= require('../models/dog');
-const Plate= require('../models/plates');
+
 
 exports.dogs_get_all=(req,res,next) =>{
     const userId= req.params.userId;
