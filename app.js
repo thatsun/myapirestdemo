@@ -14,11 +14,15 @@ const orderRoutes= require('./api/routes/orders');
 
 const userRoutes= require('./api/routes/users');
 
+const dogsRoutes= require('./api/routes/dogs');
+
 const docsRoutes= require('./api/routes/documentation');
 app.use(express.static(__dirname +'/public'));
 app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
 
-mongoose.connect('mongodb+srv://myapirestdemo_client:'+ process.env.MONGO_ATLAS_PW+'@myapirestdemo-drjj2.azure.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true});
+var connection= mongoose.connect('mongodb+srv://myapirestdemo_client:'+ process.env.MONGO_ATLAS_PW+'@myapirestdemo-drjj2.azure.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true});
+
+
 
 
 app.use(morgan('dev'));
@@ -42,6 +46,7 @@ app.use((req,res,next)=>{
 app.use('/products', producRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
+app.use('/dogs', dogsRoutes);
 app.use('/', docsRoutes);
 
 
