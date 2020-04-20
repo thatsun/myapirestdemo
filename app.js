@@ -16,9 +16,12 @@ const userRoutes= require('./api/routes/users');
 
 const dogsRoutes= require('./api/routes/dogs');
 
+const platesRoutes= require('./api/routes/plates');
+
 const docsRoutes= require('./api/routes/documentation');
 app.use(express.static(__dirname +'/public'));
 app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
+
 
 mongoose.connect('mongodb+srv://myapirestdemo_client:'+ process.env.MONGO_ATLAS_PW+'@myapirestdemo-drjj2.azure.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -47,6 +50,7 @@ app.use('/products', producRoutes);
 app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 app.use('/dogs', dogsRoutes);
+app.use('/plates', platesRoutes);
 app.use('/', docsRoutes);
 
 

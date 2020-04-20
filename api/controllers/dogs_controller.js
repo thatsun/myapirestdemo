@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Dog= require('../models/dog');
+const Plate= require('../models/plates');
 
 
 exports.dogs_get_all=(req,res,next) =>{
@@ -40,39 +41,76 @@ exports.dogs_add_dog=(req,res,next) =>{
     console.log(req.file);  
 
     console.log(req.file);
-    const dog=new Dog({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        user: req.body.user,
-        dogImage: req.file.path,
-        status:'normal',
-        platenumber:''
-    });
-    dog
-        .save()
-        .then(result=>{
-            console.log(result);
-            res.status(201).json({
-                message: 'Dog Added succesfully',
-                createdDog: {
-                    name: result.name,
-                    user: result.user,
-                    Id: result._id,
-                    dogImage: result.dogImage,
-                    status:result.status,
-                    platenumber:result.platenumber,
-                    request: {
-                        typerequest: 'GET',
-                        url: 'https://myapirestdemo.herokuapp.com/products/'+result._id
-                    } 
-                }
-            });
+    
+    const Id= '5e9e06bff2481b1954a59376';
+    Plate.findById(Id)
+        .select('platecounter platecounter_char1 platecounter_char2 _id')
+        .exec()
+        .then(doc =>{
+            console.log("From database",doc);
+
+            if(doc){
+                const newserie=doc.platecounter+1;
+                const char1=doc.platecounter_char1;
+                const char2=doc.platecounter_char2;
+
+                const chars=['a','b','c','d'];
+                
+
+
+
+                Plate.updateOne({ _id: doc._id }, { platecounter: newserie.toString(), platecounter_char1: char1.toString(), platecounter_char2: char2.toString()})
+                    .exec()
+                    .then(result => {
+                        console.log(result);
+                        const dog=new Dog({
+                            _id: new mongoose.Types.ObjectId(),
+                            name: req.body.name,
+                            user: req.body.user,
+                            dogImage: req.file.path,
+                            status:'normal',
+                            platenumber: chars[char1]+chars[char2]+'-'+newserie.toString(),
+                        });
+                        dog.save()
+                            .then(result=>{
+                                console.log(result);
+                                res.status(201).json({
+                                    message: 'Dog Added succesfully',
+                                        createdDog: {
+                                        name: result.name,
+                                        user: result.user,
+                                        Id: result._id,
+                                        dogImage: result.dogImage,
+                                        status:result.status,
+                                        platenumber:result.platenumber,
+                                        request: {
+                                            typerequest: 'GET',
+                                            url: 'https://myapirestdemo.herokuapp.com/dogs/'+result._id
+                                        } 
+                                    }
+                                });
+                        })
+                        .catch(err=> {
+                            console.log(err);
+                            res.status(500).json({
+                            message: err
+                            });
+                        });
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        res.status(500).json({
+                        error: err
+                    });
+                });
+            }
+            else{
+                res.status(404).json({ message: 'missing plate data'});
+            }                
         })
-        .catch(err=> {
+        .catch(err => {
             console.log(err);
-            res.status(500).json({
-                message: err
-            });
+            res.status(500).json({ error: err});
         });
 }
 
