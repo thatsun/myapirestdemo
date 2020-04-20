@@ -20,7 +20,7 @@ const docsRoutes= require('./api/routes/documentation');
 app.use(express.static(__dirname +'/public'));
 app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
 
-var connection= mongoose.connect('mongodb+srv://myapirestdemo_client:'+ process.env.MONGO_ATLAS_PW+'@myapirestdemo-drjj2.azure.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://myapirestdemo_client:'+ process.env.MONGO_ATLAS_PW+'@myapirestdemo-drjj2.azure.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true});
 
 
 

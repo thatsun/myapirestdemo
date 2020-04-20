@@ -50,7 +50,13 @@ exports.user_singup=(req,res,next)=>{
                 }
             });
         }
-    })
+    }).catch( err =>{
+        res.status(500).json({
+            error: err
+
+        });
+
+    });
 }
 
 exports.user_login=(req,res,next)=>{
