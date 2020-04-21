@@ -31,7 +31,7 @@ const upload=multer({storage: storage,
 });
 
 
-router.get('/',checkAuth,DogsController.dogs_get_all);
+router.get('/:userId',checkAuth,DogsController.dogs_get_all);
 
 router.post("/",checkAuth,upload.single('dogImage'),DogsController.dogs_add_dog);
 
