@@ -31,11 +31,11 @@ const upload=multer({storage: storage,
 });
 
 
-router.get('/',DogsController.dogs_get_all);
+router.get('/',checkAuth,DogsController.dogs_get_all);
 
 router.post("/",checkAuth,upload.single('dogImage'),DogsController.dogs_add_dog);
 
-router.get('/:dogId',DogsController.dogs_get_dog);
+router.get('/:dogId',checkAuth,DogsController.dogs_get_dog);
 
 router.patch('/:dogId',checkAuth,DogsController.dogs_edit_dog);
 
