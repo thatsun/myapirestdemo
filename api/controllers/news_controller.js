@@ -9,7 +9,7 @@ exports.news_get_all=(req,res,next) =>{
     .exec()
     .then(docs=> {
         const response={            
-            dogs: docs.map(doc=>{
+            news: docs.map(doc=>{
                 return{
                     postheader: doc.postheader,
                     postmessage: doc.postmessage,                    
