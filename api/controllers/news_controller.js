@@ -41,7 +41,7 @@ exports.news_add_post=(req,res,next) =>{
     
     const newspost=new Newspost({
         _id: new mongoose.Types.ObjectId(),
-        postheader: doc.postheader,
+        postheader: req.postheader,
         postmessage: req.body.postmessage,                    
         postedby: req.body.postedby,
         postdog: req.body.postdog,
