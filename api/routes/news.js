@@ -12,9 +12,9 @@ router.get('/',checkAuth,NewsController.news_get_all);
 
 router.post("/",checkAuth,NewsController.news_add_post);
 
-router.get('/:postId',checkAuth,DogsController.news_get_post);
+router.get('/:postId',checkAuth,NewsController.news_get_post);
 
-router.patch('/:postId',checkAuth,DogsController.news_edit_post);
+router.patch('/:postId',checkAuth,NewsController.news_edit_post);
 
-router.delete('/:postId',checkAuth,DogsController.news_delete_post);
+router.delete('/:postId',checkAuth,NewsController.news_delete_post);
 module.exports = router;
