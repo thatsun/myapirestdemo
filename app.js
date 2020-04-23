@@ -18,7 +18,13 @@ const dogsRoutes= require('./api/routes/dogs');
 
 const platesRoutes= require('./api/routes/plates');
 
+const newsRoutes= require('./api/routes/news');
+
+
 const docsRoutes= require('./api/routes/documentation');
+
+
+
 app.use(express.static(__dirname +'/public'));
 app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
 
@@ -51,6 +57,7 @@ app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 app.use('/dogs', dogsRoutes);
 app.use('/plates', platesRoutes);
+app.use('/news', newsRoutes);
 app.use('/', docsRoutes);
 
 
