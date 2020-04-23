@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Newspost= require('../models/newspost');
+const Newspost= require('../models/news');
 
 
 
