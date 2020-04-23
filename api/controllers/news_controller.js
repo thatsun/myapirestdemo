@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Newspost= require('../models/newsPost');
+const Newspost= require('../models/newspost');
 
 
 
@@ -89,7 +89,7 @@ exports.news_get_post=(req,res,next) =>{
                 
                 res.status(200).json({message: 'Post info found',
                 PostInfoFound: {
-                    postheader: doc.postheader,
+                    postheader: req.postheader,
                     postmessage: req.body.postmessage,                    
                     postedby: req.body.postedby,
                     postdog: req.body.postdog,
