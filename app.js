@@ -32,12 +32,9 @@ app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
 mongoose.connect('mongodb+srv://myapirestdemo_client:'+ process.env.MONGO_ATLAS_PW+'@myapirestdemo-drjj2.azure.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true});
 
 
-
-
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+
 
 
 
@@ -51,6 +48,8 @@ app.use((req,res,next)=>{
     }
     next();
 })
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use('/products', producRoutes);
 app.use('/orders', orderRoutes);
