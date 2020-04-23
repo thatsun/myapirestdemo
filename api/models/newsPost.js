@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const newapostSchema = mongoose.Schema({
+const newpostSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     postheader:{ type: String ,required:true },
     postmessage:{ type: String ,required:true },
@@ -13,4 +13,4 @@ const newapostSchema = mongoose.Schema({
     postuserid:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', require: true}
 });
 
-module.exports= mongoose.model('Newspost', newapostSchema);
+module.exports= mongoose.model('Newspost', newpostSchema);
