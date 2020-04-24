@@ -27,7 +27,7 @@ exports.news_post_coment=(req,res,next)=>{
 
 exports.news_get_all=(req,res,next) =>{    
     Newspost.find()
-    .select('_id postheader postmessage postedby postdog postdogid postmode postplate postuserid')
+    .select('_id postheader postmessage postedby postdog postdogid postmode postplate postuserid postcoments')
     .exec()
     .then(docs=> {
         const response={            
@@ -106,7 +106,7 @@ exports.news_add_post=(req,res,next) =>{
 exports.news_get_post=(req,res,next) =>{
     const Id= req.params.postID;
     Newspost.findById(Id)
-        .select('_id postheader postmessage postedby postdog postdogid postmode postplate postuserid')
+        .select('_id postheader postmessage postedby postdog postdogid postmode postplate postuserid postcoments')
         .exec()
         .then(doc =>{
             console.log("From database",doc);
