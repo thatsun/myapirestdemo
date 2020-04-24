@@ -19,6 +19,7 @@ exports.news_get_all=(req,res,next) =>{
                     postmode: doc.postmode,
                     postplate: doc.postplate,
                     postuserid: doc.postuserid,
+                    postcoments: doc.postcoments,
                     Id:doc._id
 
                 }
