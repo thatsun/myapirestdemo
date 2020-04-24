@@ -1,7 +1,29 @@
 const mongoose = require('mongoose');
 const Newspost= require('../models/news');
 
+exports.news_post_coment=(req,res,next)=>{
+    var obj={
+        comentedby: req.body.comentedby,
+        coment: req.body.coment
 
+    }
+
+    Newspost.updateOne({ _id: req.body.postid },{ $push: { postcoments : obj }})
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json({message: 'Poste coment success'
+        });
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+
+
+}
 
 exports.news_get_all=(req,res,next) =>{    
     Newspost.find()
