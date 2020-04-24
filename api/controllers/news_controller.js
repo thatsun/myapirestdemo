@@ -48,7 +48,8 @@ exports.news_add_post=(req,res,next) =>{
         postdogid: req.body.postdogid,                    
         postmode: req.body.postmode,
         postplate: req.body.postplate,
-        postuserid: req.body.postuserid
+        postuserid: req.body.postuserid,
+        postcoments: []
     });
     newspost
         .save()
@@ -65,6 +66,7 @@ exports.news_add_post=(req,res,next) =>{
                     postmode: result.postmode,
                     postplate: result.postplate,
                     postuserid: result.postuserid,
+                    postcoments: result.postcoments,
                     Id:result._id
 
                 }
@@ -97,6 +99,7 @@ exports.news_get_post=(req,res,next) =>{
                     postmode: req.body.postmode,
                     postplate: req.body.postplate,
                     postuserid: req.body.postuserid,
+                    postcoments: req.body.postcoments,
                     Id: doc._id                    
                  }
                 });
