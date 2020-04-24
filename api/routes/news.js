@@ -10,7 +10,7 @@ const NewsController=require('../controllers/news_controller');
 
 router.get('/',checkAuth,NewsController.news_get_all);
 
-router.get('/coments',checkAuth,NewsController.news_post_coment);
+router.post('/coments',checkAuth,NewsController.news_post_coment);
 
 router.post('/',checkAuth,NewsController.news_add_post);
 
