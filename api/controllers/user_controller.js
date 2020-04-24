@@ -28,7 +28,8 @@ exports.user_singup=(req,res,next)=>{
                     const user= new User({
                         _id: new mongoose.Types.ObjectId(),
                         email: req.body.email,
-                        password: hash
+                        password: hash,
+                        username: req.body.username
                 
                     });
                     user.save()
@@ -89,7 +90,8 @@ exports.user_login=(req,res,next)=>{
                 return res.status(200).json({
                     message: 'Auth succesful',
                     token: token,
-                    userId: users[0]._id
+                    userId: users[0]._id,
+                    username: users[0].username
 
                 });
 
