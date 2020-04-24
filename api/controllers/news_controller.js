@@ -2,13 +2,10 @@ const mongoose = require('mongoose');
 const Newspost= require('../models/news');
 
 exports.news_post_coment=(req,res,next)=>{
-    var obj={
-        comentedby: req.body.comentedby,
-        coment: req.body.coment
+    
+    var _data=req.body.comentedby+'|'+req.body.coment;
 
-    }
-
-    Newspost.updateOne({ _id: req.body.postid },{ $push: { postcoments : obj }})
+    Newspost.updateOne({ _id: req.body.postid },{ $push: { postcoments : _data }})
     .exec()
     .then(result => {
         console.log(result);
