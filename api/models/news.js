@@ -12,7 +12,7 @@ const newpostSchema = mongoose.Schema({
     postmode:{ type: String ,required:true },
     postplate:{ type: String ,required:true },
     postuserid:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', require: true},
-    postcoments:{ type: [[]] }
+    postcoments:{ type: [] }
 });
 
 module.exports= mongoose.model('Newspost', newpostSchema);
