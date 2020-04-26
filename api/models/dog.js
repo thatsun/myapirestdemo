@@ -7,7 +7,8 @@ const dogSchema = mongoose.Schema({
     name: { type: String , require: true },
     dogImage:{ type: String , require: true },
     status:{ type: String , require: true },
-    platenumber:{ type: String , require: true }
+    platenumber:{ type: String , require: true },
+    secretcode:{type: String , require:true}
 });
 
 module.exports= mongoose.model('Dog', dogSchema);

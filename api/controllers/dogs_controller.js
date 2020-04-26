@@ -16,6 +16,7 @@ exports.dogs_get_all=(req,res,next) =>{
                     dogImage: doc.dogImage,                    
                     status: doc.status,
                     platenumber: doc.platenumber,
+                    secretcode: doc.secretcode,
                     Id: doc._id,
                     request: {
                         typerequest: 'GET',
@@ -70,6 +71,7 @@ exports.dogs_add_dog=(req,res,next) =>{
                             dogImage: req.file.path,
                             status:'normal',
                             platenumber: chars[char1]+chars[char2]+'-'+newserie.toString(),
+                            secretcode: req.body.secretcode
                         });
                         dog.save()
                             .then(result=>{
@@ -83,6 +85,7 @@ exports.dogs_add_dog=(req,res,next) =>{
                                         dogImage: result.dogImage,
                                         status:result.status,
                                         platenumber:result.platenumber,
+                                        secretcode: result.secretcode,
                                         request: {
                                             typerequest: 'GET',
                                             url: 'https://myapirestdemo.herokuapp.com/dogs/'+result._id
@@ -130,6 +133,7 @@ exports.dogs_get_dog=(req,res,next) =>{
                     Id: doc._id,
                     dogImage: doc.dogImage,
                     platenumber:doc.platenumber,
+                    secretcode: doc.secretcode,
                     request: {
                         typerequest: 'GET',
                         description: 'Get all dogs',
