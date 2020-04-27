@@ -37,6 +37,10 @@ router.post("/",checkAuth,upload.single('dogImage'),DogsController.dogs_add_dog)
 
 router.get('/:dogId',checkAuth,DogsController.dogs_get_dog);
 
+router.get('/match',checkAuth,DogsController.dog_verify_secret);
+
+router.patch('/status',checkAuth,DogsController.dog_change_status);
+
 router.patch('/:dogId',checkAuth,DogsController.dogs_edit_dog);
 
 router.delete('/:dogId',checkAuth,DogsController.dogs_delete_dog);

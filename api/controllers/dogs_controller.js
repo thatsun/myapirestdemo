@@ -2,7 +2,58 @@ const mongoose = require('mongoose');
 const Dog= require('../models/dog');
 const Plate= require('../models/plates');
 
+exports.dog_verify_secret=(req,res,next)=>{
 
+    Dog.find({platenumber:req.body.platenumber})
+    .select('secretcode')
+    .exec()
+    .then(docs =>{
+        if(docs.length>0){
+            if(req.body.secretcode===docs[0].secretcode){
+                res.status(200).json({message: 'match'});
+
+            }
+            else{
+                res.status(200).json({message: 'dont macth'});
+
+            }
+
+        }
+        else{
+            res.status(200).json({message: 'dont macth'});
+        }
+
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+
+
+
+}
+exports.dog_change_status=(req,res,next)=>{
+
+    Dog.updateOne({ _id: req.body.dogId }, { status: req.body.status})
+    .exec()
+    .then(result =>{
+        
+        res.status(200).json({message: 'updated'});
+        
+
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
+
+
+
+}
 exports.dogs_get_all=(req,res,next) =>{
     const userId= req.params.userId;
     Dog.find({user:userId})
