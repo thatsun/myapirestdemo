@@ -36,7 +36,7 @@ exports.dog_verify_secret=(req,res,next)=>{
 }
 exports.dog_change_status=(req,res,next)=>{
 
-    Dog.updateOne({ _id: req.body.dogId }, { status: req.body.status})
+    Dog.updateOne({ _id: req.body.dogid }, { status: req.body.status})
     .exec()
     .then(result =>{
         
