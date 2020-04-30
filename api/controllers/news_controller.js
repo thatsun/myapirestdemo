@@ -27,7 +27,8 @@ exports.news_get_all=(req,res,next) =>{
     .select('_id postheader postmessage postedby postdog postdogid postmode postplate postuserid postcoments')
     .exec()
     .then(docs=> {
-        const response={            
+        const response={
+            message:'newsobtained',            
             news: docs.map(doc=>{
                 return{
                     postheader: doc.postheader,

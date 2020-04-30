@@ -83,7 +83,7 @@ exports.user_login=(req,res,next)=>{
                     userId: users[0]._id
                 },process.env.JWT_KEY,
                 {
-                    expiresIn: "1h",
+                    expiresIn: "24h",
 
                 }
                 )
