@@ -60,7 +60,7 @@ exports.dogs_get_all=(req,res,next) =>{
     .select('name _id dogImage platenumber status')
     .exec()
     .then(docs=> {
-        const response={            
+        const response={           
             dogs: docs.map(doc=>{
                 return{
                     name: doc.name,
